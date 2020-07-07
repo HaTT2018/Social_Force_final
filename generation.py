@@ -39,7 +39,7 @@ def generate_potential_field(img,c_rw,c_cw):
     (t_r,t_c) = np.meshgrid(t_r,t_c)
     distance_field = ((np.array([i**2 for i in t_r]) + np.array([i**2 for i in t_c]))**0.5)
 
-    fig = plt.figure()
+    fig = plt.figure(figsize=[12, 6], dpi=150)
     f1 = fig.add_subplot(121)
     r1 = f1.imshow(distance_field.T)#this transpose only fot visulization(result1)
     f1.plot(c_cw,c_rw,'r*')#this transpose only fot visulization
@@ -49,21 +49,24 @@ def generate_potential_field(img,c_rw,c_cw):
     f2.set_aspect('equal')
     r2 = f2.plot_surface(t_r,t_c,distance_field,cmap='rainbow')
     plt.colorbar(r2)
+    plt.xlim([0, 400])
     plt.show()
     
 
-def generate_population_plot(population_coordinate_set, img, iteration_time):
+def generate_population_plot(population_coordinate_set, img, iteration_time, root_path):
+    plt.figure(figsize=[10, 10], dpi=150)
     plt.ion()
 
     plt.cla()
     plt.imshow(img)
     r = population_coordinate_set[:,0]
     c = population_coordinate_set[:,1]
-    plt.plot(c,r,'r.')
+    plt.plot(c,r,'r.', ms=.2)
+    plt.xlim([0, 400])
     plt.pause(.001)
 
     plt.ioff()
-    plt.savefig(r'C:\\Users\\10169\\OneDrive - International Campus, Zhejiang University\\Desktop\\pics\\%i.jpg'%iteration_time)
+    plt.savefig(root_path + r'pics\\%i.jpg'%iteration_time)
 
 def generate_resultant_force_set(driven_force_set, population_repulsion_set):
     return driven_force_set + population_repulsion_set
