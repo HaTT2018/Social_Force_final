@@ -5,3 +5,4 @@ python version: 3.7.6
 1. Open "SocialForceSimulation.py", modify the "root_path".
 2. Start running.
 ## Result animation
+![image](Distribution.gif)
